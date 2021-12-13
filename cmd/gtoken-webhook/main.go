@@ -2,13 +2,13 @@ package main
 
 import (
 	"context"
+	crand "crypto/rand"
 	"fmt"
-	"math/rand"
+	"math/big"
 	"net/http"
 	"os"
 	"runtime"
 	"strings"
-	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
@@ -79,7 +79,9 @@ var logger *log.Logger
 
 // Returns an int >= min, < max
 func randomInt(min, max int) int {
-	return min + rand.Intn(max-min)
+	numRange := big.NewInt(int64(max - min))
+	increment, _ := crand.Int(crand.Reader, numRange)
+	return min + int(increment.Int64())
 }
 
 // Generate a random string of a-z chars with len = l
@@ -87,7 +89,7 @@ func randomString(l int) string {
 	if testMode {
 		return strings.Repeat("0", 16)
 	}
-	rand.Seed(time.Now().UnixNano())
+
 	bytes := make([]byte, l)
 	for i := 0; i < l; i++ {
 		bytes[i] = byte(randomInt(97, 122))
