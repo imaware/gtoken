@@ -1,0 +1,121 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Create and publish a Docker image
+
+on:
+  release:
+    types:
+      - created
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  gtoken:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: bloodbot
+          password: ${{ secrets.BOT_TOKEN }}
+
+      # Build the Docker image
+      - name: Build
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker build -t "$REGISTRY"/gtoken:"$TAG" cmd/gtoken
+
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker push "$REGISTRY"/gtoken:"$TAG"
+          docker tag "$REGISTRY"/gtoken:"$TAG" "$REGISTRY"/gtoken:"$GITHUB_SHA"
+          docker push "$REGISTRY"/gtoken:"$GITHUB_SHA"
+          docker tag "$REGISTRY"/gtoken:"$TAG" "$REGISTRY"/gtoken:latest
+          docker push "$REGISTRY"/gtoken:latest
+  gtoken-alpine:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: bloodbot
+          password: ${{ secrets.BOT_TOKEN }}
+
+      # Build the Docker image
+      - name: Build
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker build -t "$REGISTRY"/gtoken-alpine:"$TAG" --target certs cmd/gtoken
+
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker push "$REGISTRY"/gtoken-alpine:"$TAG"
+          docker tag "$REGISTRY"/gtoken-alpine:"$TAG" "$REGISTRY"/gtoken-alpine:"$GITHUB_SHA"
+          docker push "$REGISTRY"/gtoken-alpine:"$GITHUB_SHA"
+          docker tag "$REGISTRY"/gtoken-alpine:"$TAG" "$REGISTRY"/gtoken-alpine:latest
+          docker push "$REGISTRY"/gtoken-alpine:latest
+  gtoken-webhook:
+    runs-on: ubuntu-latest
+    needs:
+      - gtoken
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: bloodbot
+          password: ${{ secrets.BOT_TOKEN }}
+
+      # Build the Docker image
+      - name: Build
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker build -t "$REGISTRY"/gtoken-webhook:"$TAG" cmd/gtoken-webhook
+
+      # Push the Docker image to Google Container Registry
+      - name: Publish
+        run: |
+          export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
+          echo $TAG
+          docker push "$REGISTRY"/gtoken-webhook:"$TAG"
+          docker tag "$REGISTRY"/gtoken-webhook:"$TAG" "$REGISTRY"/gtoken-webhook:"$GITHUB_SHA"
+          docker push "$REGISTRY"/gtoken-webhook:"$GITHUB_SHA"
+          docker tag "$REGISTRY"/gtoken-webhook:"$TAG" "$REGISTRY"/gtoken-webhook:latest
+          docker push "$REGISTRY"/gtoken-webhook:latest
