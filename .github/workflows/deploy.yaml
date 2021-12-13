@@ -34,6 +34,8 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
           echo $TAG
@@ -68,6 +70,8 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
           echo $TAG
@@ -104,6 +108,8 @@ jobs:
 
       # Build the Docker image
       - name: Build
+        env:
+          DOCKER_BUILDKIT: 1
         run: |
           export TAG=`echo $GITHUB_REF | awk -F/ '{print $NF}'`
           echo $TAG
