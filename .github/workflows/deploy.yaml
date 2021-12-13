@@ -11,7 +11,7 @@ on:
       - created
 
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: ghcr.io/imaware
   IMAGE_NAME: ${{ github.repository }}
 
 jobs:
