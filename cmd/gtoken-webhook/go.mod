@@ -1,6 +1,6 @@
 module github.com/doitintl/gtoken-webhook
 
-go 1.13
+go 1.17
 
 require (
 	github.com/google/go-cmp v0.3.1

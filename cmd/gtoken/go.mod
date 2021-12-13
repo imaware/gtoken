@@ -1,6 +1,6 @@
 module github.com/doitintl/gtoken
 
-go 1.13
+go 1.17
 
 require (
 	cloud.google.com/go v0.49.0
