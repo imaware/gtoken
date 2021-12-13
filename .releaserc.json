@@ -1,0 +1,135 @@
+{
+  "branches": ["main"],
+  "tagFormat": "${version}",
+  "plugins": ["@semantic-release/commit-analyzer", "@semantic-release/release-notes-generator", "@semantic-release/changelog", "@semantic-release/git", "@semantic-release/github"],
+  "verifyConditions": ["@semantic-release/git", "@semantic-release/github"],
+  "analyzeCommits": [
+    {
+      "path": "@semantic-release/commit-analyzer",
+      "releaseRules": [
+        {
+          "type": "feat",
+          "release": "minor"
+        },
+        {
+          "type": "hotfix",
+          "release": "patch"
+        },
+        {
+          "type": "patch",
+          "release": "patch"
+        },
+        {
+          "type": "ci",
+          "release": "patch",
+          "scope": "charts/*"
+        },
+        {
+          "type": "minor",
+          "release": "minor"
+        },
+        {
+          "type": "refactor",
+          "release": "patch"
+        },
+        {
+          "type": "epic",
+          "release": "major"
+        },
+        {
+          "type": "breaking",
+          "release": "major"
+        }
+      ]
+    }
+  ],
+  "generateNotes": [
+    {
+      "path": "@semantic-release/release-notes-generator",
+      "writerOpts": {
+        "groupBy": "type",
+        "commitGroupsSort": ["feat", "perf", "fix"],
+        "commitsSort": "header"
+      },
+      "types": [
+        {
+          "type": "feat"
+        },
+        {
+          "section": "Features"
+        },
+        {
+          "type": "hotfix"
+        },
+        {
+          "section": "Bug Fixes"
+        },
+        {
+          "type": "fix"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "chore"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "docs"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "doc"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "style"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "refactor"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "perf"
+        },
+        {
+          "hidden": true
+        },
+        {
+          "type": "test"
+        },
+        {
+          "hidden": true
+        }
+      ],
+      "presetConfig": true
+    }
+  ],
+  "prepare": [
+    {
+      "path": "@semantic-release/git"
+    },
+    {
+      "path": "@semantic-release/changelog",
+      "changelogFile": "CHANGELOG.md"
+    }
+  ],
+  "publish": [
+    {
+      "path": "@semantic-release/github"
+    }
+  ],
+  "success": ["@semantic-release/github"],
+  "fail": ["@semantic-release/github"]
+}

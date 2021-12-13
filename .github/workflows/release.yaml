@@ -1,0 +1,26 @@
+name: 'Create a Release'
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+    - main
+    paths:
+      - 'cmd/**'
+
+jobs:
+  release:
+    name: 'Release'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Semantic Release
+      id: semantic
+      uses: cycjimmy/semantic-release-action@v2.6.0
+      with:
+        extra_plugins: |
+          @semantic-release/changelog
+          @semantic-release/git
+      env:
+        GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
