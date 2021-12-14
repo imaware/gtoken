@@ -1,4 +1,4 @@
-module github.com/doitintl/gtoken-webhook
+module github.com/imaware/gtoken-webhook
 
 go 1.17
 

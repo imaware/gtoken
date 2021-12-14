@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/doitintl/gtoken/internal/gcp"
+	"github.com/imaware/gtoken/internal/gcp"
 )
 
 //nolint:funlen
