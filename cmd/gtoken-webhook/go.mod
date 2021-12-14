@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/google/go-cmp v0.3.1
 	github.com/prometheus/client_golang v1.3.0
-	github.com/sirupsen/logrus v1.4.2
+	github.com/sirupsen/logrus v1.8.1
 	github.com/slok/kubewebhook v0.3.0
 	github.com/urfave/cli v1.22.5
 	k8s.io/api v0.17.0
