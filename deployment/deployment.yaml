@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: gtoken-webhook
-          image: doitintl/gtoken-webhook
+          image: ghcr.io/imaware/gtoken-webhook:latest
           imagePullPolicy: Always
           args:
             - --log-level=debug
