@@ -7,7 +7,7 @@ metadata:
 webhooks:
   - name: gtoken.kubeneretes.io
     sideEffects: None
-    admissionReviewVersions: ["v1", "v1beta1"]
+    admissionReviewVersions: ["v1beta1"]
     clientConfig:
       service:
         name: gtoken-webhook-svc
