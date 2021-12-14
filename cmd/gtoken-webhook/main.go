@@ -30,7 +30,7 @@ import (
 /* #nosec */
 const (
 	// secretsInitContainer is the default gtoken container from which to pull the 'gtoken' binary.
-	gtokenInitImage = "doitintl/gtoken:latest"
+	gtokenInitImage = "ghcr.io/imaware/gtoken:latest"
 
 	// tokenVolumeName is the name of the volume where the generated id token will be stored
 	tokenVolumeName = "gtoken-volume"
