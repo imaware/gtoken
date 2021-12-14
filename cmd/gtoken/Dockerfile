@@ -36,7 +36,7 @@ RUN make
 FROM alpine:3.15 as certs
 RUN apk --update add ca-certificates
 # this is for debug only Alpine image
-COPY --from=build /go/src/gtoken/.bin/github.com/doitintl/gtoken /gtoken
+COPY --from=build /go/src/gtoken/.bin/github.com/imaware/gtoken /gtoken
 CMD ["/gtoken"]
 
 #
@@ -48,6 +48,6 @@ FROM scratch
 COPY --from=certs /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 # this is the last commabd since it's never cached
-COPY --from=build /go/src/gtoken/.bin/github.com/doitintl/gtoken /gtoken
+COPY --from=build /go/src/gtoken/.bin/github.com/imaware/gtoken /gtoken
 
 ENTRYPOINT ["/gtoken"]

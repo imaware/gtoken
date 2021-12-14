@@ -1,4 +1,4 @@
-module github.com/doitintl/gtoken
+module github.com/imaware/gtoken
 
 go 1.17
 

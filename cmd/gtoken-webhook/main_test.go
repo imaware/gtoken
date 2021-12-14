@@ -179,7 +179,7 @@ func Test_mutatingWebhook_mutatePod(t *testing.T) {
 		{
 			name: "mutate pod",
 			fields: fields{
-				image:      "doitintl/gtoken:test",
+				image:      "ghcr.io/imaware/gtoken:latest",
 				pullPolicy: "Always",
 				volumeName: "test-volume-name",
 				volumePath: "/test-volume-path",
@@ -212,7 +212,7 @@ func Test_mutatingWebhook_mutatePod(t *testing.T) {
 					InitContainers: []corev1.Container{
 						{
 							Name:    "generate-gcp-id-token",
-							Image:   "doitintl/gtoken:test",
+							Image:   "ghcr.io/imaware/gtoken:latest",
 							Command: []string{"/gtoken", "--file=/test-volume-path/test-token", "--refresh=false"},
 							Resources: corev1.ResourceRequirements{
 								Requests: corev1.ResourceList{
@@ -246,7 +246,7 @@ func Test_mutatingWebhook_mutatePod(t *testing.T) {
 						},
 						{
 							Name:    "update-gcp-id-token",
-							Image:   "doitintl/gtoken:test",
+							Image:   "ghcr.io/imaware/gtoken:latest",
 							Command: []string{"/gtoken", "--file=/test-volume-path/test-token", "--refresh=true"},
 							Resources: corev1.ResourceRequirements{
 								Requests: corev1.ResourceList{
@@ -284,7 +284,7 @@ func Test_mutatingWebhook_mutatePod(t *testing.T) {
 		{
 			name: "injection disabled",
 			fields: fields{
-				image:      "doitintl/gtoken:test",
+				image:      "ghcr.io/imaware/gtoken:latest",
 				pullPolicy: "Always",
 				volumeName: "test-volume-name",
 				volumePath: "/test-volume-path",

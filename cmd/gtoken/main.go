@@ -10,7 +10,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/doitintl/gtoken/internal/gcp"
+	"github.com/imaware/gtoken/internal/gcp"
 
 	"github.com/urfave/cli/v2"
 )
