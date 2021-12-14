@@ -6,7 +6,7 @@ metadata:
     app: gtoken-webhook
 spec:
   ports:
-  - port: 443
-    targetPort: 8443
+    - port: 443
+      targetPort: 8443
   selector:
     app: gtoken-webhook
