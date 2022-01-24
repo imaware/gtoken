@@ -29,6 +29,7 @@ jobs:
         working-directory: ./cmd/gtoken
       - name: Run vet & lint
         run: |
+          go mod tidy
           go vet ./...
         working-directory: ./cmd/gtoken
       - name: Unit tests
@@ -66,6 +67,7 @@ jobs:
         working-directory: ./cmd/gtoken-webhook
       - name: Run vet & lint
         run: |
+          go mod tidy
           go vet ./...
         working-directory: ./cmd/gtoken-webhook
       - name: Unit tests
