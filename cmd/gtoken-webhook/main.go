@@ -200,7 +200,6 @@ func (mw *mutatingWebhook) containsGtokenInjectAnnotation(annotations map[string
 }
 
 func (mw *mutatingWebhook) mutatePod(pod *corev1.Pod, ns string, dryRun bool) error {
-
 	injectionCheck := mw.containsGtokenInjectAnnotation(pod.GetObjectMeta().GetAnnotations(), annotationInjectKey)
 
 	if !injectionCheck {
