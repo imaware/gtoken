@@ -3,7 +3,7 @@ module github.com/imaware/gtoken-webhook
 go 1.17
 
 require (
-	github.com/google/go-cmp v0.5.7
+	github.com/google/go-cmp v0.5.9
 	github.com/prometheus/client_golang v1.12.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/slok/kubewebhook v0.3.0
