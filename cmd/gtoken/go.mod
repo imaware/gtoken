@@ -6,7 +6,7 @@ require (
 	cloud.google.com/go v0.110.0
 	cloud.google.com/go/compute v1.18.0
 	cloud.google.com/go/compute/metadata v0.2.3
-	github.com/golang-jwt/jwt/v4 v4.3.0
+	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/pkg/errors v0.9.1
 	github.com/stretchr/testify v1.8.2
 	github.com/urfave/cli/v2 v2.3.0
